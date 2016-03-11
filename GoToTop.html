@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GoToTop Widget</title>
+    <style>
+    body{
+      height: 2000px;
+    }
+      .GoToTop{
+        width: 48px;
+        height: 48px;
+        border: 1px solid #e5e9ef;
+        border-radius: 4px;
+        background: #f6f9fa url('./icons.png') -648px -72px no-repeat;
+        position: fixed;
+        right: 10%;
+        top: 70%;
+        cursor: pointer;
+      }
+      .GoToTop:hover{
+        background-color: #00a1d6;
+        background-position: -714px -72px;
+        border-color: #00a1d6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="GoToTop"></div>
+  </body>
+  <script src="./jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+  //GoToTop Widget
+
+  //声明插件
+  $.fn.extend({
+    GoToTop:function(){
+      //小于隐藏
+      if($(window).scrollTop() < 1){
+        $('.GoToTop').hide();
+      }
+      //显示隐藏
+      $(window).scroll(function(){
+        if($(this).scrollTop() > 1){
+          $('.GoToTop').fadeIn();
+        }else{
+          $('.GoToTop').fadeOut();
+        }
+      });
+      //绑定点击事件
+      this.bind('click',function(){
+        $('html body').animate({scrollTop:0},100);
+        return false;
+      });
+    }
+  });
+  //调用插件
+  $(function(){
+    $('.GoToTop').GoToTop();
+  });
+  </script>
+</html>
